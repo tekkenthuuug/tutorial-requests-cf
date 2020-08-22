@@ -24,6 +24,7 @@ registerForm.addEventListener('submit', e => {
     .createUserWithEmailAndPassword(email, password)
     .then(user => {
       registerForm.reset();
+      registerForm.querySelector('.error').textContent = '';
     })
     .catch(error => {
       registerForm.querySelector('.error').textContent = error.message;
@@ -42,6 +43,7 @@ loginForm.addEventListener('submit', e => {
     .signInWithEmailAndPassword(email, password)
     .then(user => {
       loginForm.reset();
+      loginForm.querySelector('.error').textContent = '';
     })
     .catch(error => {
       loginForm.querySelector('.error').textContent = error.message;
@@ -55,7 +57,7 @@ firebase.auth().onAuthStateChanged(user => {
     authWrapper.classList.remove('open');
     authModals.forEach(modal => modal.classList.remove('active'));
   } else {
-    // Showing auth modals when user logged in
+    // Showing auth modals when user sings out
     authWrapper.classList.add('open');
     authModals[0].classList.add('active');
   }
